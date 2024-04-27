@@ -2,6 +2,7 @@
 {
     public enum Currency
     {
-        dollar, sol
+        dolar = 0,
+        sol = 1
     }
 }

@@ -11,5 +11,10 @@
         // Navigation property for the join table
         public List<SpareBrand> SpareBrands { get; set; } = new List<SpareBrand>();
 
+        public Brand()
+        {
+            BrandId = Guid.NewGuid();
+        }
+
     }
 }

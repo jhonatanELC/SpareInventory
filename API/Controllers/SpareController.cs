@@ -1,4 +1,8 @@
-﻿using Core.Contracts.Service.Spare;
+﻿using API.Wrapper;
+using Core.Contracts.Service.Spare;
+using Core.Contracts.Service.SpareBrand;
+using Core.Dtos.PriceDto;
+using Core.Dtos.SpareBrandDto;
 using Core.Dtos.SpareDto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +14,13 @@ namespace API.Controllers
     {
         private readonly ISpareAddService _spareAddService;
         private readonly ISpareGetService _spareGetService;
+        private readonly ISpareBrandAddService _spareBrandAddService;
 
-        public SpareController(ISpareAddService spareAddService, ISpareGetService spareGetService)
+        public SpareController(ISpareAddService spareAddService, ISpareGetService spareGetService, ISpareBrandAddService spareBrandAddService)
         {
             _spareAddService = spareAddService;
             _spareGetService = spareGetService;
+            _spareBrandAddService = spareBrandAddService;
         }
 
         [HttpPost]
@@ -44,6 +50,16 @@ namespace API.Controllers
             IReadOnlyList<SpareToReturn> spares =  await _spareGetService.GetSpares();
 
             return Ok(spares);
+        }
+
+        [HttpPost("AddBrand")]
+        public async Task<ActionResult<bool>> AddBrandToSpare(SpareBrandAndPriceToAdd data )
+        {   
+            bool status =  await _spareBrandAddService.AddBrandToSpare(data.SpareBrandToAdd, data.PriceToAdd);
+
+            if (!status) { return BadRequest(); }
+
+            return Ok(status);
         }
     }
 }
