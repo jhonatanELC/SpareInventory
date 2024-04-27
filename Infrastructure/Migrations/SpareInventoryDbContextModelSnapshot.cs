@@ -71,6 +71,11 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Comments")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -78,6 +83,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Group")
                         .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Keyword")
+                        .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("OemCode")
@@ -116,6 +126,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<Guid>("SpareId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
 
                     b.HasKey("SpareBrandId");
 

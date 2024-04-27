@@ -7,6 +7,8 @@ namespace Core.Domain.Entities
         public Guid SpareId { get; set; }
         public string? Sku { get; set; }
         public string Description { get; set; } = string.Empty;
+        public string Comments { get; set; } = string.Empty;
+        public string Keyword { get; set; } = string.Empty;
         public string OemCode { get; set; } = string.Empty;
         public Group Group { get; set; }
 

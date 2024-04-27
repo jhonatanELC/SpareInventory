@@ -44,6 +44,8 @@ namespace Infrastructure.Migrations
                     SpareId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Sku = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Comments = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Keyword = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     OemCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Group = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -65,6 +67,7 @@ namespace Infrastructure.Migrations
                 {
                     SpareBrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<short>(type: "smallint", nullable: false),
+                    Unit = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     CodeByBrand = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     SpareId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)

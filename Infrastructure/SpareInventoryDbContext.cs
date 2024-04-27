@@ -28,10 +28,17 @@ namespace Infrastructure
                 .WithMany(b => b.Spares)
                 .UsingEntity<SpareBrand>();
 
-
             modelBuilder.Entity<Spare>()
                 .Property(s => s.Description)
                 .HasMaxLength(100);
+
+            modelBuilder.Entity<Spare>()
+                .Property(s => s.Comments)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Spare>()
+                .Property(s => s.Keyword)
+                .HasMaxLength(20);
 
             modelBuilder.Entity<Spare>()
                 .Property(s => s.OemCode)
@@ -84,6 +91,10 @@ namespace Infrastructure
             modelBuilder.Entity<SpareBrand>()
                 .Property(sb => sb.Quantity)
                 .HasColumnType("smallint");
+
+            modelBuilder.Entity<SpareBrand>()
+                .Property(sb => sb.Unit)
+                .HasMaxLength(5);
 
             modelBuilder.Entity<SpareBrand>()
                 .Property(sb => sb.CodeByBrand)

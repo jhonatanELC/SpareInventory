@@ -4,6 +4,7 @@
     {
         public Guid SpareBrandId { get; set; }
         public int Quantity { get; set; }
+        public string Unit { get; set; } 
         public string? CodeByBrand { get; set; }
 
         // FK
