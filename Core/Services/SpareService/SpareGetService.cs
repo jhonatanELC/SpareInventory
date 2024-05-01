@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Contracts.Persistence;
-using Core.Contracts.Service.Spare;
+using Core.Contracts.Service.SpareService;
 using Core.Domain.Entities;
 using Core.Dtos.SpareDto;
 
@@ -10,11 +10,13 @@ namespace Core.Services.SpareService
     {
         private readonly IGenericRepository<Spare> _genericRepository;
         private readonly IMapper _mapper;
+        private readonly ISpareRepository _spareRepository;
 
-        public SpareGetService(IGenericRepository<Spare> genericRepository, IMapper mapper)
+        public SpareGetService(IGenericRepository<Spare> genericRepository, IMapper mapper, ISpareRepository spareRepository)
         {
             _genericRepository = genericRepository;
             _mapper = mapper;
+            _spareRepository = spareRepository;
         }
 
         public async Task<SpareToReturn?> GetSpareById(Guid spareId)
@@ -34,6 +36,13 @@ namespace Core.Services.SpareService
             IReadOnlyList<Spare>  spares=  await _genericRepository.ListAllAsync();
 
             return _mapper.Map<IReadOnlyList<SpareToReturn>>(spares);
+        }
+
+        public async Task<IReadOnlyList<SpareWithBrandToReturn>> GetSparesWithBrands()
+        {
+            IReadOnlyList<Spare> spares = await _spareRepository.GetSparesWithBrandsAsync();
+
+            return _mapper.Map<IReadOnlyList<SpareWithBrandToReturn>>(spares);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Core.Contracts.Persistence
+﻿using System.Linq.Expressions;
+
+namespace Core.Contracts.Persistence
 {
     public interface IGenericRepository<T> where T: class
     {   
@@ -8,6 +10,13 @@
         /// <param name="id"></param>
         /// <returns>An entity</returns>
         Task<T?> GetByIdAsync(Guid id);
+
+        /// <summary>
+        /// Checks if the entity exists by Id
+        /// </summary>
+        /// <param name="id">An expression that compares the Id of the entity</param>
+        /// <returns></returns>
+        Task<bool> ExistsEntityAsync(Expression<Func<T, bool>> predicate );
 
         /// <summary>
         /// Get a list of entities 

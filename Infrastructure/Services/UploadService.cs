@@ -1,4 +1,5 @@
-﻿using Core.Contracts.Infrastructure.Upload;
+﻿using Core.Contracts.Infrastructure;
+using Core.Contracts.Infrastructure.Upload;
 using Core.Dtos;
 using CsvHelper;
 using Microsoft.AspNetCore.Http;
@@ -10,9 +11,11 @@ namespace Infrastructure.Services
 {
     public class UploadService : IUploadService
     {
-        public UploadService()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public UploadService(IUnitOfWork unitOfWork)
         {
-            
+            _unitOfWork = unitOfWork;
         }
 
         public Task UploadFromCsvFile(IFormFile file)

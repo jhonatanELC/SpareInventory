@@ -22,5 +22,10 @@ namespace Core.Domain.Entities
         // Navigation property for the join table
         public List<SpareBrand> SpareBrands { get; set; } = new List<SpareBrand>();
 
+        public Spare()
+        {
+            SpareId = Guid.NewGuid();
+        }
+
     }
 }

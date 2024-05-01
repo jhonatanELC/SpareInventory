@@ -9,6 +9,7 @@ namespace Core.Profiles
         public SpareBrandProfile()
         {
             CreateMap<SpareBrandToAdd, SpareBrand>();
+            CreateMap<SpareBrand, SpareBrandToReturn>();
         }
 
     }

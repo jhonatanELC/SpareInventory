@@ -1,6 +1,6 @@
 ﻿using Core.Dtos.SpareDto;
 
-namespace Core.Contracts.Service.Spare
+namespace Core.Contracts.Service.SpareService
 {
     public interface ISpareAddService
     {   

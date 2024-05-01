@@ -1,11 +1,12 @@
 ﻿using Core.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T: class
     {
-        private readonly SpareInventoryDbContext _dbContext;
+        protected readonly SpareInventoryDbContext _dbContext;
 
         public GenericRepository(SpareInventoryDbContext dbContext)
         {
@@ -20,6 +21,11 @@ namespace Infrastructure.Repositories
         public  void DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
+        }
+
+        public async Task<bool> ExistsEntityAsync( Expression<Func<T, bool>> predicate)
+        {
+            return await _dbContext.Set<T>().AnyAsync(predicate);
         }
 
         public async Task<T?> GetByIdAsync(Guid id)

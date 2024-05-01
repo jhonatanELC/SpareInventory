@@ -9,6 +9,7 @@ namespace Core.Profiles
         public PriceProfile()
         {
             CreateMap<PriceToAdd, Price>();
+            CreateMap<Price, PriceToReturn>();            
         }
     }
 }

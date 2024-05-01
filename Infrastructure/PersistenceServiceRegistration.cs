@@ -1,5 +1,7 @@
-﻿using Core.Contracts.Persistence;
+﻿using Core.Contracts.Infrastructure;
+using Core.Contracts.Persistence;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,9 @@ namespace Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<ISpareRepository, SpareRepository>();
+            services.AddScoped<ISpareBrandRepository, SpareBrandRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

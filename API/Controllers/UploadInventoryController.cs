@@ -6,6 +6,7 @@ namespace API.Controllers
     [ApiController]
     public class UploadInventoryController : Controller
     {
+        [HttpPost]
         public async Task<IActionResult> UploadCsvFile(IFormFile file)
         {
             return Ok();
