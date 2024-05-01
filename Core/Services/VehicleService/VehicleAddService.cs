@@ -22,6 +22,7 @@ namespace Core.Services.VehicleService
             Vehicle vehicle =  _mapper.Map<Vehicle>(vehicleToAdd);
 
             await _genericRepository.AddAsync(vehicle);
+            await _genericRepository.SaveChangesAsync();
 
             VehicleToReturn vehicleToReturn = _mapper.Map<VehicleToReturn>(vehicle);
 

@@ -1,6 +1,4 @@
-﻿using API.Wrapper;
-using Core.Contracts.Service.SpareService;
-using Core.Contracts.Service.SpareBrand;
+﻿using Core.Contracts.Service.SpareService;
 using Core.Dtos.SpareDto;
 using Microsoft.AspNetCore.Mvc;
 using Core.Domain.Entities;
@@ -13,14 +11,12 @@ namespace API.Controllers
     {
         private readonly ISpareAddService _spareAddService;
         private readonly ISpareGetService _spareGetService;
-        private readonly ISpareBrandAddService _spareBrandAddService;
         private readonly ISpareDeleteService _spareDeleteService;
 
-        public SpareController(ISpareAddService spareAddService, ISpareGetService spareGetService, ISpareBrandAddService spareBrandAddService, ISpareDeleteService spareDeleteService)
+        public SpareController(ISpareAddService spareAddService, ISpareGetService spareGetService, ISpareDeleteService spareDeleteService)
         {
             _spareAddService = spareAddService;
             _spareGetService = spareGetService;
-            _spareBrandAddService = spareBrandAddService;
             _spareDeleteService = spareDeleteService;
         }
 
@@ -89,27 +85,6 @@ namespace API.Controllers
             }
             
             return NoContent();
-        }
-
-        [HttpPost("AddBrand")]
-        public async Task<ActionResult<bool>> AddBrandToSpare(SpareBrandAndPriceToAdd data )
-        {
-            try
-            {
-                bool status = await _spareBrandAddService.AddBrandToSpare(data.SpareBrandToAdd, data.PriceToAdd);
-                return Ok(status);
-
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new { message = ex.Message });
-
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-
         }
     }
 }

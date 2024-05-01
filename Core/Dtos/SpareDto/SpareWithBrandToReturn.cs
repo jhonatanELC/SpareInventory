@@ -14,9 +14,7 @@ namespace Core.Dtos.SpareDto
         public string Keyword { get; set; }
         public string OemCode { get; set; }
         public Group Group { get; set; }
+        public List<BrandsWithPriceToReturn> Brands { get; set; }
 
-        public List<BrandToReturn> Brands { get; set; }
-        public List<SpareBrandToReturn> SpareBrands { get; set; }
-        public PriceToReturn Price { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace Core.Profiles
         public BrandsProfile()
         {
             CreateMap<Brand, BrandToReturn>();
+            CreateMap<Brand, BrandsWithPriceToReturn>();
         }
     }
 }

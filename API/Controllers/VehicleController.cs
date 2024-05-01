@@ -9,18 +9,28 @@ namespace API.Controllers
     public class VehicleController : Controller
     {
         private readonly IVehicleAddService _vehicleAddService;
+        private readonly IVehicleGetService _vehicleGetService;
 
-        public VehicleController(IVehicleAddService vehicleAddService)
+        public VehicleController(IVehicleAddService vehicleAddService, IVehicleGetService vehicleGetService )
         {
             _vehicleAddService = vehicleAddService;
+            _vehicleGetService = vehicleGetService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<VehicleToReturn>> AddBrand(VehicleToAdd vehicleToAdd)
+        public async Task<ActionResult<VehicleToReturn>> AddVehicle(VehicleToAdd vehicleToAdd)
         {
             var vehicleToReturn = await _vehicleAddService.AddVehicle(vehicleToAdd);
 
             return Ok(vehicleToReturn);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<VehicleToReturn>>> GetVehicles()
+        {
+            var vehicles = await _vehicleGetService.GetVehicles();
+
+            return Ok(vehicles);
         }
     }
 }

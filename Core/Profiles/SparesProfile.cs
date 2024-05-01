@@ -11,6 +11,7 @@ namespace Core.Profiles
             CreateMap<SpareToAdd, Spare>();
             CreateMap<Spare, SpareToReturn>();
             CreateMap<Spare, SpareWithBrandToReturn>();
+            CreateMap<Spare, SpareWithBrandToReturn>();
         }
     }
 }

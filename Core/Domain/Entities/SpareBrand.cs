@@ -14,6 +14,6 @@
         // Navigation properties
         public Spare Spare { get; set; }
         public Brand Brand { get; set; }
-        public Price Price { get; set; }
+        public Price Price { get; set; } 
     }
 }

@@ -7,5 +7,7 @@ namespace Core.Dtos.PriceDto
         public Currency Currency { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal SellPrice { get; set; }
+        public int Igv { get; set; }
+        public int ProfitMargin { get; set; }
     }
 }

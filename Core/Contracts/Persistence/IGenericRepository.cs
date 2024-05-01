@@ -50,5 +50,11 @@ namespace Core.Contracts.Persistence
         /// <returns></returns>
         Task<bool> SaveChangesAsync();
 
+        /// <summary>
+        /// Gets the DbSet as IQueryable
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<T> GetDbSet();
+
     }
 }

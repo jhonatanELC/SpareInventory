@@ -13,6 +13,10 @@ namespace Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        public IQueryable<T> GetDbSet()
+        {
+            return _dbContext.Set<T>();
+        }
         public async Task AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);

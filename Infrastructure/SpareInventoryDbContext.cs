@@ -118,6 +118,14 @@ namespace Infrastructure
                 .Property(p => p.Currency)
                 .HasConversion(converter2)
                 .HasColumnType("nvarchar(10)");
+
+            modelBuilder.Entity<Price>()
+                .Property(p => p.ProfitMargin)
+                .HasColumnType("smallint");
+
+            modelBuilder.Entity<Price>()
+                .Property(p => p.Igv)
+                .HasColumnType("smallint");
         }
     }
 }

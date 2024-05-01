@@ -1,7 +1,7 @@
 ﻿using Core.Dtos.PriceDto;
 using Core.Dtos.SpareBrandDto;
 
-namespace Core.Contracts.Service.SpareBrand
+namespace Core.Contracts.Service.SpareBrandService
 {
     public interface ISpareBrandAddService
     {
