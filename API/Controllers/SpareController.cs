@@ -2,6 +2,7 @@
 using Core.Dtos.SpareDto;
 using Microsoft.AspNetCore.Mvc;
 using Core.Domain.Entities;
+using Core.Dtos.Filters;
 
 namespace API.Controllers
 {
@@ -59,10 +60,10 @@ namespace API.Controllers
         }
 
         [HttpGet("SparesWithBrands")]
-        public async Task<ActionResult<IReadOnlyList<SpareWithBrandToReturn>>> GetSparesWithBrands()
+        public async Task<ActionResult<IReadOnlyList<SpareWithBrandToReturn>>> GetSparesWithBrands(SpareFilter filter)
         {
-            var spares = await _spareGetService.GetSparesWithBrands();
-
+            var spares = await _spareGetService.GetSparesWithBrands(filter);
+         
             return Ok(spares);
         }
 

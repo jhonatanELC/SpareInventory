@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SpareInventoryDbContext))]
-    [Migration("20240427231823_initial")]
+    [Migration("20240504003824_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -38,6 +38,9 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("BrandId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Brands");
                 });
 
@@ -50,6 +53,12 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<short>("Igv")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("ProfitMargin")
+                        .HasColumnType("smallint");
 
                     b.Property<decimal>("SellPrice")
                         .HasColumnType("smallmoney");
@@ -75,7 +84,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -88,23 +96,22 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Keyword")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<string>("OemCode")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Sku")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<Guid?>("VehicleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("SpareId");
+
+                    b.HasIndex("Sku")
+                        .IsUnique();
 
                     b.HasIndex("VehicleId");
 
@@ -139,7 +146,8 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.HasIndex("SpareId");
+                    b.HasIndex("SpareId", "BrandId")
+                        .IsUnique();
 
                     b.ToTable("SpareBrands");
                 });
@@ -163,6 +171,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("smallint");
 
                     b.HasKey("VehicleId");
+
+                    b.HasIndex("Brand", "Model")
+                        .IsUnique()
+                        .HasFilter("[Model] IS NOT NULL");
 
                     b.ToTable("Vehicles");
                 });

@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using API.Middleware;
+using Core;
 using Infrastructure;
 namespace API
 {
@@ -24,6 +25,8 @@ namespace API
 
         public static WebApplication ConfigurePipeline(this WebApplication app)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

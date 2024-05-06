@@ -1,4 +1,5 @@
-﻿using Core.Dtos.SpareDto;
+﻿using Core.Dtos.Filters;
+using Core.Dtos.SpareDto;
 
 namespace Core.Contracts.Service.SpareService
 {
@@ -7,6 +8,6 @@ namespace Core.Contracts.Service.SpareService
         Task<SpareToReturn?> GetSpareById(Guid spareId);
         Task<IReadOnlyList<SpareToReturn>> GetSpares();
 
-        Task<IReadOnlyList<SpareWithBrandToReturn>> GetSparesWithBrands();
+        Task<IReadOnlyList<SpareWithBrandToReturn>> GetSparesWithBrands(SpareFilter filter);
     }
 }

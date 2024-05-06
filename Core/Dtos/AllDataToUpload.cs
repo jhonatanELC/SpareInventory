@@ -1,4 +1,4 @@
-﻿using Core.Enum;
+﻿using Core.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.Dtos

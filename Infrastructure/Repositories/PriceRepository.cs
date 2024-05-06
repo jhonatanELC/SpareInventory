@@ -8,5 +8,6 @@ namespace Infrastructure.Repositories
         public PriceRepository(SpareInventoryDbContext dbContext) : base(dbContext)
         {
         }
+
     }
 }

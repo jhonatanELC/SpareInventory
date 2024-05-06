@@ -1,4 +1,4 @@
-﻿using Core.Enum;
+﻿using Core.Enums;
 
 namespace Core.Dtos.PriceDto
 {

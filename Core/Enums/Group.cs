@@ -1,9 +1,9 @@
-﻿namespace Core.Enum
+﻿namespace Core.Enums
 {
     public enum Group
     {   
         Ninguno = 0,
-        Corona = 1,
-        Caja = 2
+        CORONA = 1,
+        CAJA = 2
     }
 }

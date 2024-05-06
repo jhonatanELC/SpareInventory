@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Entities;
+using Core.Dtos.Filters;
 
 namespace Core.Contracts.Persistence
 {
@@ -6,6 +7,6 @@ namespace Core.Contracts.Persistence
     {
         Task<bool> ExistOemCode(string oemCode);
 
-        Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync();
+        Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync(SpareFilter filter);
     }
 }

@@ -2,6 +2,7 @@
 using Core.Contracts.Persistence;
 using Core.Contracts.Service.SpareService;
 using Core.Domain.Entities;
+using Core.Dtos.Filters;
 using Core.Dtos.SpareDto;
 
 namespace Core.Services.SpareService
@@ -38,9 +39,9 @@ namespace Core.Services.SpareService
             return _mapper.Map<IReadOnlyList<SpareToReturn>>(spares);
         }
 
-        public async Task<IReadOnlyList<SpareWithBrandToReturn>> GetSparesWithBrands()
+        public async Task<IReadOnlyList<SpareWithBrandToReturn>> GetSparesWithBrands(SpareFilter filter)
         {
-            IReadOnlyList<Spare> spares = await _spareRepository.GetSparesWithBrandsAsync();
+            IReadOnlyList<Spare> spares = await _spareRepository.GetSparesWithBrandsAsync(filter);
 
             return _mapper.Map<IReadOnlyList<SpareWithBrandToReturn>>(spares);
         }

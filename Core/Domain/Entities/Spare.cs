@@ -1,15 +1,14 @@
-﻿using Core.Enum;
+﻿using Core.Enums;
 
 namespace Core.Domain.Entities
 {
     public class Spare
     {
         public Guid SpareId { get; set; }
-        public string? Sku { get; set; }
-        public string Description { get; set; } = string.Empty;
-        public string Comments { get; set; } = string.Empty;
-        public string Keyword { get; set; } = string.Empty;
-        public string OemCode { get; set; } = string.Empty;
+        public string Sku { get; set; }
+        public string Description { get; set; }
+        public string? Comments { get; set; }
+        public string? OemCode { get; set; } 
         public Group Group { get; set; }
 
         // Foreign key property

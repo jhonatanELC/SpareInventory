@@ -42,11 +42,10 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     SpareId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Sku = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sku = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Keyword = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    OemCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Comments = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    OemCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Group = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -97,6 +96,8 @@ namespace Infrastructure.Migrations
                     Currency = table.Column<string>(type: "nvarchar(10)", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "smallmoney", nullable: false),
                     SellPrice = table.Column<decimal>(type: "smallmoney", nullable: false),
+                    Igv = table.Column<short>(type: "smallint", nullable: false),
+                    ProfitMargin = table.Column<short>(type: "smallint", nullable: false),
                     SpareBrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -111,6 +112,12 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Brands_Name",
+                table: "Brands",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Prices_SpareBrandId",
                 table: "Prices",
                 column: "SpareBrandId",
@@ -122,14 +129,28 @@ namespace Infrastructure.Migrations
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SpareBrands_SpareId",
+                name: "IX_SpareBrands_SpareId_BrandId",
                 table: "SpareBrands",
-                column: "SpareId");
+                columns: new[] { "SpareId", "BrandId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Spares_Sku",
+                table: "Spares",
+                column: "Sku",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Spares_VehicleId",
                 table: "Spares",
                 column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_Brand_Model",
+                table: "Vehicles",
+                columns: new[] { "Brand", "Model" },
+                unique: true,
+                filter: "[Model] IS NOT NULL");
         }
 
         /// <inheritdoc />

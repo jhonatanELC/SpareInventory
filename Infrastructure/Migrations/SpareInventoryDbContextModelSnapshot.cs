@@ -35,6 +35,9 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("BrandId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Brands");
                 });
 
@@ -78,7 +81,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -91,23 +93,22 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Keyword")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<string>("OemCode")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Sku")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<Guid?>("VehicleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("SpareId");
+
+                    b.HasIndex("Sku")
+                        .IsUnique();
 
                     b.HasIndex("VehicleId");
 
@@ -142,7 +143,8 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.HasIndex("SpareId");
+                    b.HasIndex("SpareId", "BrandId")
+                        .IsUnique();
 
                     b.ToTable("SpareBrands");
                 });
@@ -166,6 +168,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("smallint");
 
                     b.HasKey("VehicleId");
+
+                    b.HasIndex("Brand", "Model")
+                        .IsUnique()
+                        .HasFilter("[Model] IS NOT NULL");
 
                     b.ToTable("Vehicles");
                 });

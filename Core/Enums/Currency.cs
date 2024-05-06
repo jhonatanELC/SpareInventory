@@ -1,4 +1,4 @@
-﻿namespace Core.Enum
+﻿namespace Core.Enums
 {
     public enum Currency
     {

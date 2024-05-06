@@ -1,5 +1,5 @@
 ﻿using Core.Domain.Entities;
-using Core.Enum;
+using Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -36,13 +36,14 @@ namespace Infrastructure
                 .Property(s => s.Comments)
                 .HasMaxLength(100);
 
-            modelBuilder.Entity<Spare>()
-                .Property(s => s.Keyword)
-                .HasMaxLength(20);
 
             modelBuilder.Entity<Spare>()
                 .Property(s => s.OemCode)
                 .HasMaxLength(20);
+
+            modelBuilder.Entity<Spare>()
+                .Property(s => s.Sku)
+                .HasMaxLength(30);
 
             var converter = new ValueConverter<Group, string>(
                 v => v.ToString(),
@@ -53,10 +54,18 @@ namespace Infrastructure
                 .HasConversion(converter)
                 .HasColumnType("nvarchar(20)");
 
+            modelBuilder.Entity<Spare>()
+                .HasIndex(s =>  s.Sku )
+                .IsUnique();
+
             //Brand
             modelBuilder.Entity<Brand>()
                 .Property(b => b.Name)
                 .HasMaxLength(20);
+
+            modelBuilder.Entity<Brand>()
+                .HasIndex(b => b.Name)
+                .IsUnique();
 
             //Vehicle
             modelBuilder.Entity<Vehicle>()
@@ -77,6 +86,10 @@ namespace Infrastructure
             modelBuilder.Entity<Vehicle>()
                 .Property(v => v.Year)
                 .HasColumnType("smallint");
+
+            modelBuilder.Entity<Vehicle>()
+                .HasIndex(v => new { v.Brand, v.Model })
+                .IsUnique();
 
             // SpareBrand
             modelBuilder.Entity<SpareBrand>()
@@ -99,6 +112,10 @@ namespace Infrastructure
             modelBuilder.Entity<SpareBrand>()
                 .Property(sb => sb.CodeByBrand)
                 .HasMaxLength(20);
+
+            modelBuilder.Entity<SpareBrand>()
+                .HasIndex(sb => new {sb.SpareId , sb.BrandId })
+                .IsUnique();
 
             // Price
             modelBuilder.Entity<Price>()
