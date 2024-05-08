@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Core.Domain.Entities.Spare>
-
+﻿@model IEnumerable<SpareWithBrandToReturn>
 @{
    ViewData["Title"] = "Index";
 }
@@ -21,112 +20,121 @@
 </div>
 <div class="main-down">
    <div class="firstRow">
-      <div class="c1">
-         <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M181.3 32.4c17.4 2.9 29.2 19.4 26.3 36.8L197.8 128h95.1l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3s29.2 19.4 26.3 36.8L357.8 128H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H347.1L325.8 320H384c17.7 0 32 14.3 32 32s-14.3 32-32 32H315.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l9.8-58.7H155.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8L90.2 384H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l21.3-128H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3zM187.1 192L165.8 320h95.1l21.3-128H187.1z" /></svg>
-         <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M181.3 32.4c17.4 2.9 29.2 19.4 26.3 36.8L197.8 128h95.1l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3s29.2 19.4 26.3 36.8L357.8 128H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H347.1L325.8 320H384c17.7 0 32 14.3 32 32s-14.3 32-32 32H315.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l9.8-58.7H155.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8L90.2 384H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l21.3-128H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3zM187.1 192L165.8 320h95.1l21.3-128H187.1z" /></svg>
-         <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M181.3 32.4c17.4 2.9 29.2 19.4 26.3 36.8L197.8 128h95.1l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3s29.2 19.4 26.3 36.8L357.8 128H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H347.1L325.8 320H384c17.7 0 32 14.3 32 32s-14.3 32-32 32H315.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l9.8-58.7H155.1l-11.5 69.3c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8L90.2 384H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l21.3-128H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h68.9l11.5-69.3c2.9-17.4 19.4-29.2 36.8-26.3zM187.1 192L165.8 320h95.1l21.3-128H187.1z" /></svg>
-      </div>
-      <div class="c2">
-         <svg class="icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" /></svg>
-      </div>
-      <div class="c3">
-         <p>Conteo</p>
-      </div>
+      @*       <form method="get" asp-asp-controller="Spares" asp-action="Index">
+      <input type="text" id="oem" name="filterByOemCode" placeholder="OEM" value="" />
+      <input type="text" id="sku" name="searchrBySku" placeholder="SKU" value="" />
+      <input type="text" id="description" name="searchByDescription" placeholder="Desccripción" value="" />
+      <input type="text" id="group" name="filterByGroup" placeholder="Grupo" value="" />
+
+      <input type="submit" value="Submit"/>
+      </form> *@
+
+      @*      <form asp-controller="Spares" asp-action="Index" method="get">
+      @{
+      string searchBy = ViewBag.Key;
+      }
+      <select name=@searchBy }>
+
+      @foreach (var field in ViewBag.SearchFileds)
+      {
+      if (field.Key == ViewBag.CurrentSearchBy)
+      {
+      <option value="@field.Key selected="selected">@field.Value</option>
+      }
+      else
+      {
+      <option value="@field.Key">@field.Value</option>
+      }
+      }
+      </select>
+
+      <input type="search" id="Search" placeholder="Search" name =
+      value="@ViewBag.CurrentSearchBy" />
+      <button>Search</button>
+      <a asp-controller="Spares" asp-action="Index">Clear All</a>
+      </form> *@
+      
+      <select id="dropdown">
+         @foreach (var item in ViewBag.SearchFileds)
+         {
+            if (item.Key == ViewBag.CurrentSearchBy)
+            {
+               <option value="@item.Key" selected="selected" >@item.Value</option>
+            }
+            else
+            {
+               <option value="@item.Key">@item.Value</option>
+            }
+         }     
+      </select>
+
+      <input type="text" id="inputField" >
+      <button onclick="submitForm()">Submit</button>
+      <a asp-controller="Spares" asp-action="Index">Borrar</a>
    </div>
+
    <div class="secondRow">
       <table>
          <tr>
-            <th>@Html.DisplayNameFor(model => model.OemCode)</th>
-            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>OEM</th>
+            <th>Descripción</th>
             <th>Marca</th>
             <th>Código</th>
-            <th>Vehículo</th>
-            <th>Modelo</th>
             <th>Costo</th>
             <th>Moneda</th>
             <th>Venta</th>
          </tr>
-         
+
          @foreach (var spare in Model)
          {
-            <tr>
-               <td>@Html.DisplayFor(spares => spare.OemCode)</td>
-               <td>@Html.DisplayFor(spares => spare.Description)</td>
-               <td>Marca</td>
-               <td>Código</td>
-               <td>Vehículo</td>
-               <td>Modelo</td>
-               <td>Costo</td>
-               <td>Moneda</td>
-               <td>Venta</td>
-            </tr>
+            CultureInfo cultureInfo;
+
+            var brandQuantity = spare.Brands.Count;
+            BrandsWithPriceToReturn? brandVm = spare.Brands.FirstOrDefault();
+            SpareBrandToReturn? spareBrandVm = brandVm?.SpareBrands.FirstOrDefault();
+
+
+            cultureInfo = spareBrandVm?.Price.Currency.ToString() == "sol" ?
+            new CultureInfo("es-PE") :
+            new CultureInfo("en-US");
+
+
+            if (brandQuantity > 1)
+            {
+               foreach (var brand in spare.Brands)
+               {
+                  <tr>
+                     <td>@Html.DisplayFor(model => spare.OemCode)</td>
+                     <td>@Html.DisplayFor(spares => spare.Description)</td>
+                     <td>@Html.Raw(brand.Name)</td>
+                     <td>@Html.Raw(brand.SpareBrands[0].CodeByBrand)</td>
+                     <td>@Html.Raw(brand.SpareBrands[0].Price.UnitPrice.ToString("C", cultureInfo))</td>
+                     <td>@Html.Raw(brand.SpareBrands[0].Price.Currency.ToString())</td>
+                     <td>@Html.Raw(brand.SpareBrands[0].Price.SellPrice.ToString("C", cultureInfo))</td>
+                  </tr>
+               }
+            }
+            else
+            {
+               <tr>
+                  <td>@Html.DisplayFor(model => spare.OemCode)</td>
+                  <td>@Html.DisplayFor(model => spare.Description)</td>
+                  <td>@Html.Raw(brandVm?.Name)  </td> @* @Html.Encode *@
+                  <td>@Html.Raw(spareBrandVm?.CodeByBrand)</td>
+                  <td>@Html.Raw(spareBrandVm?.Price.UnitPrice.ToString("C", cultureInfo))</td>
+                  <td>@Html.Raw(spareBrandVm?.Price.Currency.ToString())</td>
+                  <td>@Html.Raw(spareBrandVm?.Price.SellPrice.ToString("C", cultureInfo))</td>
+               </tr>
+            }
+
+
          }
       </table>
    </div>
 </div>
 
 
-
-
-@* 
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Sku)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OemCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Group)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vehicle)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sku)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OemCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Group)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.Brand)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SpareId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SpareId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SpareId">Delete</a>
-            </td>
-        </tr>
+@section scripts {
+   <script src="~/js/spareindex.js"></script>
 }
-    </tbody>
-</table>
- *@
+
