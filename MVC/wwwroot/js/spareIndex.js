@@ -19,7 +19,7 @@ function submitForm() {
    // Construct the full URL including the base path to your controller action
    const baseUrl = window.location.origin; // Gets the current origin (protocol + hostname + port)
    const actionPath = '/Spares/Index'; // The path to your controller action
-   const queryString = `?${selectedValue}=${inputFieldValue}&&${selectedGroup}=${selectedText}&&currentSearchBy=${selectedValue}&&currentFilterByValue=${selectedText}&&currentsearchValue=${inputFieldValue}`; // The query string
+   const queryString = `?currentSearchBy=${selectedValue}&&currentFilterByValue=${selectedText}&&currentsearchValue=${inputFieldValue}`; // The query string
 
    const url = `${baseUrl}${actionPath}${queryString}`;
 
