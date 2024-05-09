@@ -26,16 +26,27 @@ namespace MVC.Controllers
          _context = context;
       }
 
-      // GET: Spares
       [Route("[action]")]
       [Route("/")]
-      //public async Task<IActionResult> Index()
-      //{
-      //    var spareInventoryDbContext = _context.Spares.Include(s => s.Vehicle);
-      //    return View(await spareInventoryDbContext.ToListAsync());
-      //}
-      public async Task<IActionResult> Index(SpareFilter filter, string? currentsearchValue, string? currentSearchBy= "searchrBySku", string? currentFilterByValue = "CORONA")
-      {  
+      public async Task<IActionResult> Index(string? currentsearchValue, string? currentSearchBy= "searchrBySku", string? currentFilterByValue = "Ninguno")
+      {
+
+         SpareFilter filter = new();
+         filter.filterByGroup = currentFilterByValue;
+
+         if(currentSearchBy == "searchrBySku")
+         {
+            filter.searchrBySku = currentsearchValue;
+         }
+         else if(currentSearchBy == "filterByOemCode")
+         {
+            filter.filterByOemCode = currentsearchValue;
+         }
+         else
+         {
+            filter.searchByDescription = currentsearchValue;
+         }
+
          // Calling the service
          IEnumerable<SpareWithBrandToReturn> spares = await _spareGetService.GetSparesWithBrands(filter);
 
