@@ -7,6 +7,7 @@ using Core.Dtos.Filters;
 using Core.Dtos.SpareDto;
 using Core.Contracts.Service.SpareService;
 using System.Globalization;
+using Core.Enums;
 
 namespace MVC.Controllers
 {
@@ -33,10 +34,17 @@ namespace MVC.Controllers
       //    var spareInventoryDbContext = _context.Spares.Include(s => s.Vehicle);
       //    return View(await spareInventoryDbContext.ToListAsync());
       //}
-      public async Task<IActionResult> Index(SpareFilter filter, string? currentSearchBy= "searchrBySku")
-      {
-         //ViewBag.CurrentFilterBy = filter.filterByGroup;
+      public async Task<IActionResult> Index(SpareFilter filter, string? currentsearchValue, string? currentSearchBy= "searchrBySku", string? currentFilterByValue = "CORONA")
+      {  
+         // Calling the service
+         IEnumerable<SpareWithBrandToReturn> spares = await _spareGetService.GetSparesWithBrands(filter);
+
+         // Get the groups
+         string[] groups = Enum.GetNames<Group>();
+
+         ViewBag.CurrentFilterByValue = currentFilterByValue;
          ViewBag.CurrentSearchBy = currentSearchBy;
+         ViewBag.CurrentSearchValue = currentsearchValue;
 
          ViewBag.SearchFileds = new Dictionary<string, string>()
          {
@@ -45,8 +53,8 @@ namespace MVC.Controllers
             {nameof(SpareFilter.searchrBySku), "Sku" }
          };
 
-
-         IEnumerable<SpareWithBrandToReturn> spares = await _spareGetService.GetSparesWithBrands(filter);
+         ViewData["groups"] = groups;
+         
 
          return View(spares);
       }

@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<SpareWithBrandToReturn>
 @{
    ViewData["Title"] = "Index";
+   string[] groups = (string[])ViewData["groups"]!;
+
 }
 
 <div class="main-up">
@@ -20,57 +22,40 @@
 </div>
 <div class="main-down">
    <div class="firstRow">
-      @*       <form method="get" asp-asp-controller="Spares" asp-action="Index">
-      <input type="text" id="oem" name="filterByOemCode" placeholder="OEM" value="" />
-      <input type="text" id="sku" name="searchrBySku" placeholder="SKU" value="" />
-      <input type="text" id="description" name="searchByDescription" placeholder="Desccripción" value="" />
-      <input type="text" id="group" name="filterByGroup" placeholder="Grupo" value="" />
-
-      <input type="submit" value="Submit"/>
-      </form> *@
-
-      @*      <form asp-controller="Spares" asp-action="Index" method="get">
-      @{
-      string searchBy = ViewBag.Key;
-      }
-      <select name=@searchBy }>
-
-      @foreach (var field in ViewBag.SearchFileds)
-      {
-      if (field.Key == ViewBag.CurrentSearchBy)
-      {
-      <option value="@field.Key selected="selected">@field.Value</option>
-      }
-      else
-      {
-      <option value="@field.Key">@field.Value</option>
-      }
-      }
+      <select id="group-dropdown">
+         @foreach (var item in groups)
+         {
+            if (item == ViewBag.CurrentFilterByValue)
+            {
+               <option value="filterByGroup" selected="selected">@item</option>
+            }
+            else
+            {
+               <option value="filterByGroup">@item</option>
+            }
+         }
       </select>
 
-      <input type="search" id="Search" placeholder="Search" name =
-      value="@ViewBag.CurrentSearchBy" />
-      <button>Search</button>
-      <a asp-controller="Spares" asp-action="Index">Clear All</a>
-      </form> *@
-      
       <select id="dropdown">
          @foreach (var item in ViewBag.SearchFileds)
          {
             if (item.Key == ViewBag.CurrentSearchBy)
             {
-               <option value="@item.Key" selected="selected" >@item.Value</option>
+               <option value="@item.Key" selected="selected">@item.Value</option>
             }
             else
             {
                <option value="@item.Key">@item.Value</option>
             }
-         }     
+         }
       </select>
 
-      <input type="text" id="inputField" >
+      <input type="text" id="inputField" value="@ViewBag.CurrentSearchValue">
       <button onclick="submitForm()">Submit</button>
-      <a asp-controller="Spares" asp-action="Index">Borrar</a>
+      <button>
+         <a asp-controller="Spares" asp-action="Index">Borrar</a>
+
+      </button>
    </div>
 
    <div class="secondRow">
