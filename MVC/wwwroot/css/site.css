@@ -4,9 +4,9 @@ html {
    padding: 0;
    font-size: 62.5%;
 }
+
 a {
    text-decoration: none;
-
 }
 
 body {
@@ -21,6 +21,13 @@ aside {
    width: 20%;
    height: 100%;
    border-right: solid darkgray 1px;
+}
+.aside-content{
+   margin-top:2rem;
+}
+
+.aside-links {
+   color: rgb(88, 196, 220, 1);
 }
 
 header {
@@ -63,8 +70,9 @@ main {
       text-align: center;
    }
 
-.big-icon-container p {
+.big-icon-container p a {
    font-size: 1.4rem;
+   color: white;
 }
 
 .main-down {
@@ -104,3 +112,114 @@ th, td {
 tr:hover {
    background-color: rgba(88, 196, 220, 0.5);
 }
+
+/*Create*/
+.form {
+   font-size: 1.5rem;
+   padding: 0 10rem 0 10rem;
+}
+
+.f-row {
+   display: flex;
+   justify-content: space-around;
+}
+
+   .f-row .c1 {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      padding: 0rem 2rem 0 2rem;
+   }
+
+   .f-row .c2 {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      padding: 0rem 2rem 0 2rem;
+   }
+
+.c1-field {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 2rem;
+}
+
+   .c1-field input {
+      height:2rem;
+   }
+
+.c2-field {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 2rem;
+   position:relative;
+}
+#btn-createBrand{
+   position:absolute;
+   right:-60px;
+   top :0.5px;
+   padding:0.3rem 1rem 0.3rem 1rem;
+   font-size:1.5rem
+
+}
+.c2-field input {
+   height: 2rem;
+}
+
+.c1-field input {
+   margin-right: 2rem
+}
+
+.c2-field input {
+   margin-right: 2rem
+}
+
+.s-row {
+   margin-top:2rem
+
+}
+
+   .s-row .field {
+      display: flex;
+      flex-direction:column;
+      margin-bottom: 2rem;
+      padding:0 2rem 0 2rem
+   }
+
+.field textarea {
+   resize: none;
+}
+
+.buttons{
+   display:flex;
+   justify-content:space-evenly;
+   margin-top:2rem;
+}
+
+
+.button-style button {
+   background: transparent;
+   border: none;
+   color: white;
+}
+
+.button-styl button:focus {
+   outline: none;
+   border: none;
+}
+
+.button-style {
+   display: inline-block;
+   padding: 10px 20px;
+   background-color: rgb(88, 196, 220,1); /* Example background color */
+   color: #fff; /* Text color */
+   text-align: center;
+   text-decoration: none;
+   font-size: 16px;
+   transition: background-color 0.3s ease;
+   border-radius: 5px; /* Rounded corners */
+}
+
+   .button-style:hover {
+      background-color: rgb(60, 150, 190); /* Slightly darker blue for hover */
+   }

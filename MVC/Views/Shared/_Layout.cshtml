@@ -5,7 +5,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <title>@ViewData["Title"] - MVC</title>
    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-   <link rel="icon" href="~/favicon.png"/>
+   <link rel="icon" href="~/favicon.png" />
    <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -13,10 +13,11 @@
       <header>
          <img src="~/images/logo.png" alt="">
       </header>
-      <div class="aside-menu">
-         <a >Inicio</a>
-         <p>Productos</p>
-         <p>Documentos</p>
+      <div class="aside-menu"> 
+         <div class="aside-content">
+            <a class="aside-links" asp-controller="Spares" asp-action="Index">Productos</a>
+         </div>
+   
       </div>
    </aside>
    <main>

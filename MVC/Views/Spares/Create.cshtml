@@ -1,10 +1,106 @@
-﻿@model Core.Domain.Entities.Spare
+﻿@model SpareToAddVm
 
 @{
-    ViewData["Title"] = "Create";
+   ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Agregar Producto</h1>
+
+<form method="post" class="form" asp-controller="Spares" asp-action="Create">
+   <div class="f-row">
+      <div class="c1">
+         <div class="c1-field">
+            <label asp-for="OemCode">OEM</label>
+            <input type="text" asp-for="OemCode" />
+            <span asp-validation-for="OemCode"></span>
+         </div>
+         <div class="c1-field">
+            <label asp-for="Unit">Unidad</label>
+            <select asp-for="Unit"  asp-items="@ViewData["Units"] as IEnumerable<SelectListItem>">
+               <option value="">Seleccione</option>
+            </select>
+         </div>
+         <div class="c1-field">
+            <label>Grupo</label>
+            <select asp-for="Group" asp-items="@ViewData["Groups"] as IEnumerable<SelectListItem>">
+               <option value="">Seleccione</option>
+            </select>
+         </div>
+         <div class="c1-field">
+            <label asp-for="Sku">Sku</label>
+            <input asp-for="Sku" placeholder="Campo requerido"/>
+         </div>
+      </div>
+      <div class="c2">
+         <div class="c2-field">
+            <label>Marca</label>
+            <select asp-for="BrandId" asp-items="@ViewData["Brands"] as IEnumerable<SelectListItem> ">
+               <option value="">Seleccione</option>
+            </select>
+            <button id="btn-createBrand" class="button-style">Agregar</button>
+         </div>
+
+         <div class="c2-field">
+            <label asp-for="CodeByBrand">Código de Marca</label>
+            <input asp-for="CodeByBrand" />
+         </div>
+         <div class="c2-field">
+            <label >Vehículo</label>
+            <input />
+         </div>
+         <div class="c2-field">
+            <label>Modelo</label>
+            <input />
+         </div>
+      </div>
+   </div>
+   <div class="s-row">
+      <div class="field">
+         <label asp-for="Description">Descripción</label>
+         <textarea asp-for="Description" placeholder="Campo requerido"></textarea>
+      </div>
+      <div class="field">
+         <label asp-for="Comments">Comentarios</label>
+         <textarea asp-for="Comments"></textarea>
+      </div>
+   </div>
+
+   <hr />
+   <div class="f-row">
+      <div class="c1">
+         <div class="c1-field">
+            <label asp-for="UnitPrice">Costo</label>
+            <input asp-for ="UnitPrice" type="number" />
+         </div>
+         <div class="c1-field">
+            <label asp-for="Igv">Impuesto</label>
+            <input asp-for="Igv" type="number"/>
+         </div>
+      </div>
+      <div class="c2">
+         <div class="c2-field">
+            <label asp-for="ProfitMargin">Margen de Ganancia</label>
+            <input asp-for="ProfitMargin" type="number"/>
+         </div>
+         <div class="c2-field">
+            <label asp-for="SellPrice">Precio de venta</label>
+            <input asp-for="SellPrice" type="number"/>
+         </div>
+      </div>
+   </div>
+   <div class="buttons">
+      <div class="button-style">
+         <button type="submit">Guardar</button>
+      </div>
+      <div class="button-style">
+         <a asp-controller="Spares" asp-action="Index" style="color:white;">Cancelar</a>
+      </div>
+   </div>
+</form>
+
+
+
+@* <h1>Create</h1>
 
 <h4>Spare</h4>
 <hr />
@@ -50,8 +146,10 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div>
+</div> *@
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+   @{
+      await Html.RenderPartialAsync("_ValidationScriptsPartial");
+   }
 }
