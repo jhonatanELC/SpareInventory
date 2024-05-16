@@ -23,7 +23,7 @@ First, a web API, then an MVC app, and finally, I will use React.
 
 ### Which technology to use?
 
-[![My Skills](https://skillicons.dev/icons?i=cs,dotnet,postgres,react,js,html,css)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=cs,dotnet,react,js,html,css)](https://skillicons.dev)  <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="mssql" width="55" height="50"/> </a>
 
 ### Which are my entities?
 
