@@ -44,9 +44,10 @@ Well, I'm not a designer, but I used to draw electrical plans in AutoCAD. I was 
 ![image](https://github.com/jhonatanELC/SpareInventory/assets/160936645/62fd0b8e-7771-4d9a-962d-40d624d15249)
 
 ## Getting Started
+> This project hasn't been finished yet. It is still in development.
 
 ### 1. Clone the repository
-There are two branches: main and MVC. The first is a web API, and the second is an MVC app.
+There are two branches: master and MVC. The first is a web API, and the second is an MVC app.
 
 ```shell
 git clone https://github.com/jhonatanELC/SpareInventory.git
