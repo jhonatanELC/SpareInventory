@@ -1,12 +1,13 @@
 ﻿using Core.Domain.Entities;
-using Core.Dtos.Filters;
+using Core.Services.SpareService.Queries;
 
 namespace Core.Contracts.Persistence
 {
     public interface ISpareRepository
-    {
-        Task<bool> ExistOemCode(string oemCode);
+   {
+      Task<bool> ExistOemCode(string oemCode);
+      Task<bool> ExistSku(string sku);
 
-        Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync(SpareFilter filter);
-    }
+      Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync(SpareFilter filter);
+   }
 }

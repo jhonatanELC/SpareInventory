@@ -1,4 +1,4 @@
-﻿namespace Core.Dtos.SpareBrandDto
+﻿namespace Core.Services.SpareBrandService
 {
     public class SpareBrandToAdd
     {

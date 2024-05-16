@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Domain.Entities;
-using Core.Dtos.VehicleDto;
+using Core.Services.VehicleService.Commands.Create;
 
 namespace Core.Profiles
 {

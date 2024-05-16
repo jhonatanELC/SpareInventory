@@ -2,10 +2,8 @@
 using Core.Contracts.Persistence;
 using Core.Contracts.Service.SpareService;
 using Core.Domain.Entities;
-using Core.Dtos.Filters;
-using Core.Dtos.SpareDto;
 
-namespace Core.Services.SpareService
+namespace Core.Services.SpareService.Queries
 {
     public class SpareGetService : ISpareGetService
     {
@@ -22,7 +20,7 @@ namespace Core.Services.SpareService
 
         public async Task<SpareToReturn?> GetSpareById(Guid spareId)
         {
-            Spare? spare =  await _genericRepository.GetByIdAsync(spareId);
+            Spare? spare = await _genericRepository.GetByIdAsync(spareId);
 
             if (spare == null)
             {
@@ -34,7 +32,7 @@ namespace Core.Services.SpareService
 
         public async Task<IReadOnlyList<SpareToReturn>> GetSpares()
         {
-            IReadOnlyList<Spare>  spares=  await _genericRepository.ListAllAsync();
+            IReadOnlyList<Spare> spares = await _genericRepository.ListAllAsync();
 
             return _mapper.Map<IReadOnlyList<SpareToReturn>>(spares);
         }

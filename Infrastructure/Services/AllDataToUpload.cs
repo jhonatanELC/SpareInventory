@@ -1,7 +1,7 @@
 ﻿using Core.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Dtos
+namespace Infrastructure.Services
 {
     public class AllDataToUpload
     {

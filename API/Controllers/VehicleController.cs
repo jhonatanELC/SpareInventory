@@ -1,5 +1,5 @@
 ﻿using Core.Contracts.Service.Vehicle;
-using Core.Dtos.VehicleDto;
+using Core.Services.VehicleService.Commands.Create;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

@@ -1,4 +1,4 @@
-﻿using Core.Dtos.BrandDto;
+﻿using Core.Services.BrandService.Commands.Create;
 
 namespace Core.Contracts.Service.Brand
 {

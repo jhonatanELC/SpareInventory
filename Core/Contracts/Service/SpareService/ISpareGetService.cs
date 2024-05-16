@@ -1,13 +1,12 @@
-﻿using Core.Dtos.Filters;
-using Core.Dtos.SpareDto;
+﻿using Core.Services.SpareService.Queries;
 
 namespace Core.Contracts.Service.SpareService
 {
-    public interface ISpareGetService
-    {
-        Task<SpareToReturn?> GetSpareById(Guid spareId);
-        Task<IReadOnlyList<SpareToReturn>> GetSpares();
+   public interface ISpareGetService
+   {
+      Task<SpareToReturn?> GetSpareById(Guid spareId);
+      Task<IReadOnlyList<SpareToReturn>> GetSpares();
 
-        Task<IReadOnlyList<SpareWithBrandToReturn>> GetSparesWithBrands(SpareFilter filter);
-    }
+      Task<IReadOnlyList<SpareWithBrandToReturn>> GetSparesWithBrands(SpareFilter filter);
+   }
 }

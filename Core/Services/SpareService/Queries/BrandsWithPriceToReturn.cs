@@ -1,6 +1,4 @@
-﻿using Core.Dtos.SpareBrandDto;
-
-namespace Core.Dtos.BrandDto
+﻿namespace Core.Services.SpareService.Queries
 {
     public class BrandsWithPriceToReturn
     {

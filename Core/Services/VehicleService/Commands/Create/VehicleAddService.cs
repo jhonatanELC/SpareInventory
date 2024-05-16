@@ -2,9 +2,8 @@
 using Core.Contracts.Persistence;
 using Core.Contracts.Service.Vehicle;
 using Core.Domain.Entities;
-using Core.Dtos.VehicleDto;
 
-namespace Core.Services.VehicleService
+namespace Core.Services.VehicleService.Commands.Create
 {
     public class VehicleAddService : IVehicleAddService
     {
@@ -19,7 +18,7 @@ namespace Core.Services.VehicleService
 
         public async Task<VehicleToReturn> AddVehicle(VehicleToAdd vehicleToAdd)
         {
-            Vehicle vehicle =  _mapper.Map<Vehicle>(vehicleToAdd);
+            Vehicle vehicle = _mapper.Map<Vehicle>(vehicleToAdd);
 
             await _genericRepository.AddAsync(vehicle);
             await _genericRepository.SaveChangesAsync();

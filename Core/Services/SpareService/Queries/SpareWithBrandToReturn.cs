@@ -1,9 +1,9 @@
-﻿using Core.Dtos.BrandDto;
-using Core.Enums;
+﻿using Core.Enums;
+using Core.Responses;
 
-namespace Core.Dtos.SpareDto
+namespace Core.Services.SpareService.Queries
 {
-    public class SpareWithBrandToReturn
+    public class SpareWithBrandToReturn : BaseResponse
     {
         public Guid SpareId { get; set; }
         public string? Sku { get; set; }

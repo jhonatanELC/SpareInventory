@@ -1,4 +1,4 @@
-﻿using Core.Dtos.VehicleDto;
+﻿using Core.Services.VehicleService.Commands.Create;
 
 namespace Core.Contracts.Service.Vehicle
 {

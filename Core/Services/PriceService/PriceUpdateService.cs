@@ -2,7 +2,6 @@
 using Core.Contracts.Persistence;
 using Core.Contracts.Service.PriceService;
 using Core.Domain.Entities;
-using Core.Dtos.PriceDto;
 
 namespace Core.Services.PriceService
 {

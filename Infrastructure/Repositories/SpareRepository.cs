@@ -1,12 +1,12 @@
 ﻿using Core.Contracts.Persistence;
 using Core.Domain.Entities;
-using Core.Dtos.Filters;
 using Core.Enums;
+using Core.Services.SpareService.Queries;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-   public class SpareRepository : GenericRepository<Spare>, ISpareRepository
+    public class SpareRepository : GenericRepository<Spare>, ISpareRepository
    {
       public SpareRepository(SpareInventoryDbContext dbContext) : base(dbContext)
       {
@@ -16,6 +16,11 @@ namespace Infrastructure.Repositories
       public async Task<bool> ExistOemCode(string oemCode)
       {
          return await _dbContext.Spares.AnyAsync(s => s.OemCode == oemCode);
+      }
+
+      public async Task<bool> ExistSku(string sku)
+      {
+         return await _dbContext.Spares.AnyAsync(s => s.Sku == sku);
       }
 
       public async Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync(SpareFilter filter)

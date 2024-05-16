@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Domain.Entities;
-using Core.Dtos.BrandDto;
+using Core.Services.BrandService.Commands.Create;
+using Core.Services.SpareService.Queries;
 
 namespace Core.Profiles
 {

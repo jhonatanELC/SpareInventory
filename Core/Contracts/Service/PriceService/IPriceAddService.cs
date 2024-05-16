@@ -1,5 +1,4 @@
-﻿using Core.Dtos.BrandDto;
-using Core.Dtos.PriceDto;
+﻿using Core.Services.PriceService;
 
 namespace Core.Contracts.Service.PriceService
 {

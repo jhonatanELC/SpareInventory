@@ -3,12 +3,16 @@ using Core.Contracts.Service.SpareService;
 using Core.Contracts.Service.SpareBrandService;
 using Core.Services.BrandService;
 using Core.Services.SpareBrandService;
-using Core.Services.SpareService;
 using Microsoft.Extensions.DependencyInjection;
 using Core.Contracts.Service.PriceService;
 using Core.Services.PriceService;
 using Core.Contracts.Service.Vehicle;
-using Core.Services.VehicleService;
+using Core.Services.SpareService.Commands.Create;
+using Core.Services.SpareService.Commands.Delete;
+using Core.Services.SpareService.Queries;
+using Core.Services.VehicleService.Commands.Create;
+using Core.Services.VehicleService.Queries;
+using Core.Services.BrandService.Commands.Create;
 
 namespace Core
 {

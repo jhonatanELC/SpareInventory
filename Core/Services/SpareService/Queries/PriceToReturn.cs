@@ -1,6 +1,6 @@
 ﻿using Core.Enums;
 
-namespace Core.Dtos.PriceDto
+namespace Core.Services.SpareService.Queries
 {
     public class PriceToReturn
     {

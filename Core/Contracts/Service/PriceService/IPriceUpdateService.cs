@@ -1,5 +1,5 @@
-﻿using Core.Dtos.PriceDto;
-using Core.Domain.Entities;
+﻿using Core.Domain.Entities;
+using Core.Services.PriceService;
 
 namespace Core.Contracts.Service.PriceService
 {

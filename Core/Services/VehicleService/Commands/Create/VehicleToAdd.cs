@@ -1,4 +1,4 @@
-﻿namespace Core.Dtos.VehicleDto
+﻿namespace Core.Services.VehicleService.Commands.Create
 {
     public class VehicleToAdd
     {

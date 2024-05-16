@@ -1,6 +1,5 @@
 ﻿using Core.Contracts.Service.Brand;
-using Core.Dtos.BrandDto;
-using Core.Dtos.SpareDto;
+using Core.Services.BrandService.Commands.Create;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

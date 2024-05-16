@@ -2,9 +2,8 @@
 using Core.Contracts.Persistence;
 using Core.Contracts.Service.Brand;
 using Core.Domain.Entities;
-using Core.Dtos.BrandDto;
 
-namespace Core.Services.BrandService
+namespace Core.Services.BrandService.Commands.Create
 {
     public class BrandAddService : IBrandAddService
     {

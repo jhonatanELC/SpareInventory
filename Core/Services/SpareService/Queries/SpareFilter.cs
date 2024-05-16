@@ -1,4 +1,4 @@
-﻿namespace Core.Dtos.Filters
+﻿namespace Core.Services.SpareService.Queries
 {
     public class SpareFilter
     {

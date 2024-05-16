@@ -2,8 +2,7 @@
 using Core.Contracts.Persistence;
 using Core.Contracts.Service.SpareBrandService;
 using Core.Domain.Entities;
-using Core.Dtos.PriceDto;
-using Core.Dtos.SpareBrandDto;
+using Core.Services.PriceService;
 
 namespace Core.Services.SpareBrandService
 {

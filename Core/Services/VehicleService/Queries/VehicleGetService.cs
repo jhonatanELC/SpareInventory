@@ -2,9 +2,9 @@
 using Core.Contracts.Persistence;
 using Core.Contracts.Service.Vehicle;
 using Core.Domain.Entities;
-using Core.Dtos.VehicleDto;
+using Core.Services.VehicleService.Commands.Create;
 
-namespace Core.Services.VehicleService
+namespace Core.Services.VehicleService.Queries
 {
     public class VehicleGetService : IVehicleGetService
     {

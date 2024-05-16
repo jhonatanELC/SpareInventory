@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\BrandService\Commands\Delete\" />
-    <Folder Include="Services\BrandService\Queries\" />
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>
