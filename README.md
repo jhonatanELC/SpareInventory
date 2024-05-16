@@ -10,6 +10,8 @@ Hello and welcome to my first ambitious project! You might be wondering, what ex
 - [Which type of web app must I choose?](#which-type-of-web-app-must-i-choose)
 - [Which are my entities?](#which-are-my-entities)
 - [Which type of architecture to use?](#which-type-of-architecture-to-use)
+- [What about the views?](#What-about-the-views)
+- [Getting Started](#Getting-Started)
 
 ### Why an inventory app, you ask?
 
@@ -34,6 +36,49 @@ Well, it all starts with the UML class diagram. It took me many hours to figure 
 ### **Which type of architecture to use?**
 
 I decided to use clean architecture because it offers clear separation of concerns, which means that the core of my application will be decoupled from the Infrastructure and UI layers. This separation allows me to write the business logic once and use it with different presentation layers such as APIs, MVC, or React projects. By adopting clean architecture, I ensure that my application is modular, maintainable, and easily extensible in the future.
+
+### **What about the views?**
+
+Well, I'm not a designer, but I used to draw electrical plans in AutoCAD. I was going to use it, but then I heard about Figma, so I decided to try it out and make a simple sketch
+
+![image](https://github.com/jhonatanELC/SpareInventory/assets/160936645/62fd0b8e-7771-4d9a-962d-40d624d15249)
+
+## Getting Started
+
+### 1. Clone the repository
+There are two branches: main and MVC. The first is a web API, and the second is an MVC app.
+
+```shell
+git clone https://github.com/jhonatanELC/SpareInventory.git
+cd SpareInventory
+```
+
+### 2. Set up the Database
+
+- Go to **appsettings.json** 
+  ```
+    "ConnectionStrings": {
+    "DefaultConnection": "Here type your connection string"
+  }
+  ```
+- Run the Migrations
+  ``` shell
+  dotnet ef database update -s API -p Infrastructure
+  ```
+
+### 3. Run the app
+
+```shell
+dotnet run -p API
+```
+
+### 4. Open the app in your browser
+
+Visit [http://localhost:7229](http://localhost:7229) in your browser.
+
+
+
+
 
 
 
