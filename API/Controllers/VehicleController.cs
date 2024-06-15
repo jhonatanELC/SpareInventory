@@ -1,36 +1,36 @@
-﻿using Core.Contracts.Service.Vehicle;
-using Core.Services.VehicleService.Commands.Create;
-using Microsoft.AspNetCore.Mvc;
+﻿//using Core.Contracts.Service.Vehicle;
+//using Core.Services.VehicleService.Commands.Create;
+//using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
-{
-    [Route("api/vehicles")]
-    [ApiController]
-    public class VehicleController : Controller
-    {
-        private readonly IVehicleAddService _vehicleAddService;
-        private readonly IVehicleGetService _vehicleGetService;
+//namespace API.Controllers
+//{
+//    [Route("api/vehicles")]
+//    [ApiController]
+//    public class VehicleController : Controller
+//    {
+//        private readonly IVehicleAddService _vehicleAddService;
+//        private readonly IVehicleGetService _vehicleGetService;
 
-        public VehicleController(IVehicleAddService vehicleAddService, IVehicleGetService vehicleGetService )
-        {
-            _vehicleAddService = vehicleAddService;
-            _vehicleGetService = vehicleGetService;
-        }
+//        public VehicleController(IVehicleAddService vehicleAddService, IVehicleGetService vehicleGetService )
+//        {
+//            _vehicleAddService = vehicleAddService;
+//            _vehicleGetService = vehicleGetService;
+//        }
 
-        [HttpPost]
-        public async Task<ActionResult<VehicleToReturn>> AddVehicle(VehicleToAdd vehicleToAdd)
-        {
-            var vehicleToReturn = await _vehicleAddService.AddVehicle(vehicleToAdd);
+//        [HttpPost]
+//        public async Task<ActionResult<VehicleToReturn>> AddVehicle(VehicleToAdd vehicleToAdd)
+//        {
+//            var vehicleToReturn = await _vehicleAddService.AddVehicle(vehicleToAdd);
 
-            return Ok(vehicleToReturn);
-        }
+//            return Ok(vehicleToReturn);
+//        }
 
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<VehicleToReturn>>> GetVehicles()
-        {
-            var vehicles = await _vehicleGetService.GetVehicles();
+//        [HttpGet]
+//        public async Task<ActionResult<IReadOnlyList<VehicleToReturn>>> GetVehicles()
+//        {
+//            var vehicles = await _vehicleGetService.GetVehicles();
 
-            return Ok(vehicles);
-        }
-    }
-}
+//            return Ok(vehicles);
+//        }
+//    }
+//}

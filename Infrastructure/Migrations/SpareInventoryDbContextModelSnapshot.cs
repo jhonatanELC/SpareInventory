@@ -97,18 +97,10 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.Property<Guid?>("VehicleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("SpareId");
-
-                    b.HasIndex("Sku")
-                        .IsUnique();
 
                     b.HasIndex("VehicleId");
 
@@ -130,6 +122,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<short>("Quantity")
                         .HasColumnType("smallint");
+
+                    b.Property<string>("Sku")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<Guid>("SpareId")
                         .HasColumnType("uniqueidentifier");

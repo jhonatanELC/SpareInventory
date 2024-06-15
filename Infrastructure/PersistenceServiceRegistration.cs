@@ -8,19 +8,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
-    public static class PersistenceServiceRegistration
-    {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<SpareInventoryDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+   public static class PersistenceServiceRegistration
+   {
+      public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+      {
+         services.AddDbContext<SpareInventoryDbContext>(options =>
+             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<ISpareRepository, SpareRepository>();
-            services.AddScoped<ISpareBrandRepository, SpareBrandRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+         services.AddScoped<ISpareRepository, SpareRepository>();
+         services.AddScoped<IBrandRepository, BrandRepository>();
+         services.AddScoped<IPriceRepository, PriceRepository>();
+         services.AddScoped<ISpareBrandRepository, SpareBrandRepository>();
 
-            return services;
-        }
-    }
+         return services;
+      }
+   }
 }

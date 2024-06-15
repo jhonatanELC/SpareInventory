@@ -9,12 +9,8 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="FluentValidation" Version="11.9.1" />
+    <PackageReference Include="MediatR" Version="12.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\BrandService\Commands\Delete\" />
-    <Folder Include="Services\BrandService\Queries\" />
   </ItemGroup>
 
 </Project>

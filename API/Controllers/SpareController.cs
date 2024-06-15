@@ -1,101 +1,29 @@
-﻿using Core.Contracts.Service.SpareService;
-using Microsoft.AspNetCore.Mvc;
-using Core.Domain.Entities;
-using Core.Services.SpareService.Commands.Create;
-using Core.Services.SpareService.Queries;
+﻿using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using Core.Features.Spares.Commands.DeleteSpare;
 
 namespace API.Controllers
 {
-    [Route("api/spares")]
+   [Route("api/spares")]
    [ApiController]
    public class SpareController : Controller
    {
-      private readonly ISpareAddService _spareAddService;
-      private readonly ISpareGetService _spareGetService;
-      private readonly ISpareDeleteService _spareDeleteService;
+      private readonly IMediator _mediator;
 
-      public SpareController(ISpareAddService spareAddService, ISpareGetService spareGetService, ISpareDeleteService spareDeleteService)
+      public SpareController(IMediator mediator)
       {
-         _spareAddService = spareAddService;
-         _spareGetService = spareGetService;
-         _spareDeleteService = spareDeleteService;
-      }
-
-      [HttpPost]
-      public async Task<ActionResult<SpareToReturn>> AddSpare(SpareToAdd spareToAdd)
-      {
-         try
-         {
-            var spareToReturn = await _spareAddService.AddSpare(spareToAdd);
-
-            return CreatedAtRoute("GetSpare",
-                new
-                {
-                   spareId = spareToReturn.spare.SpareId
-                }, spareToReturn);
-         }
-         catch (InvalidOperationException ex)
-         {
-            // Return a BadRequest or Conflict response with a custom error message
-            return BadRequest(new { message = ex.Message });
-         }
-         catch (Exception ex)
-         {
-            // Return a generic error response
-            return StatusCode(500, "Internal server error");
-         }
-      }
-
-      [HttpPost("AddSpareWithBrand")]
-      public async Task<ActionResult<SpareWithBrandToReturn>> AddSpareWithBrand(SpareWithBrandToAdd spareToAdd)
-      {
-         SpareVmToReturn spareToReTurn = await _spareAddService.AddSpareWithBrand(spareToAdd);
-
-         return Ok(spareToReTurn);
-      }
-
-
-
-      [HttpGet("{spareId}", Name = "GetSpare")]
-      public async Task<ActionResult<SpareToReturn>> GetSpare(Guid spareId)
-      {
-         SpareToReturn? spare = await _spareGetService.GetSpareById(spareId);
-
-         if (spare == null)
-         {
-            return NotFound();
-         }
-
-         return Ok(spare);
-      }
-
-      [HttpGet("SparesWithBrands")]
-      public async Task<ActionResult<IReadOnlyList<SpareWithBrandToReturn>>> GetSparesWithBrands(SpareFilter filter)
-      {
-         var spares = await _spareGetService.GetSparesWithBrands(filter);
-
-         return Ok(spares);
-      }
-
-      [HttpGet]
-      public async Task<ActionResult<IReadOnlyList<SpareToReturn>>> GetAllSpare()
-      {
-         IReadOnlyList<SpareToReturn> spares = await _spareGetService.GetSpares();
-
-         return Ok(spares);
+         _mediator = mediator;
       }
 
       [HttpDelete("{spareId}")]
       public async Task<ActionResult> DeleteSpare(Guid spareId)
       {
-         Spare? spare = await _spareDeleteService.DeleteSpare(spareId);
+         var deleteSpareCommand = new DeleteSpareCommand() { SpareId = spareId };
+         var response = await _mediator.Send(deleteSpareCommand);
 
-         if (spare == null)
-         {
-            return NotFound();
-         }
+         if (response) return NoContent();
 
-         return NoContent();
+         return NotFound();
       }
    }
 }

@@ -1,13 +1,14 @@
 ﻿using Core.Domain.Entities;
-using Core.Services.SpareService.Queries;
+using Core.Features.Spares.Queries.GetSparesWithBrands;
+
 
 namespace Core.Contracts.Persistence
 {
-    public interface ISpareRepository
+    public interface ISpareRepository : IGenericRepository<Spare>
    {
       Task<bool> ExistOemCode(string oemCode);
-      Task<bool> ExistSku(string sku);
-
-      Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync(SpareFilter filter);
+      Task<Spare?> GetSpareByOemCode(string oemCode);
+      Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync(GetSparesWithBrandsQuery filter);
+      Task<Spare?> GetSpareWithBrands(Guid spareId);
    }
 }

@@ -1,47 +1,37 @@
-﻿using Core.Contracts.Service.Brand;
-using Core.Contracts.Service.SpareService;
-using Core.Contracts.Service.SpareBrandService;
-using Core.Services.BrandService;
-using Core.Services.SpareBrandService;
-using Microsoft.Extensions.DependencyInjection;
-using Core.Contracts.Service.PriceService;
-using Core.Services.PriceService;
-using Core.Contracts.Service.Vehicle;
-using Core.Services.SpareService.Commands.Create;
-using Core.Services.SpareService.Commands.Delete;
-using Core.Services.SpareService.Queries;
-using Core.Services.VehicleService.Commands.Create;
-using Core.Services.VehicleService.Queries;
-using Core.Services.BrandService.Commands.Create;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+
 
 namespace Core
 {
-    public static class ApplicationServiceRegistration
-    {
-        public static IServiceCollection AddCoreServiceCollection(this IServiceCollection services)
-        {
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            // Spare
-            services.AddScoped<ISpareAddService, SpareAddService>();
-            services.AddScoped<ISpareGetService, SpareGetService>();
-            services.AddScoped<ISpareDeleteService, SpareDeleteService>();
+   public static class ApplicationServiceRegistration
+   {
+      public static IServiceCollection AddCoreServiceCollection(this IServiceCollection services)
+      {
+         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-            // Brand
-            services.AddScoped<IBrandAddService, BrandAddService>();
-            services.AddScoped<IBrandGetService, BrandGetService>();
+         // Spare
+         //services.AddScoped<ISpareAddService, SpareAddService>();
+         //services.AddScoped<ISpareGetService, SpareGetService>();
+         //services.AddScoped<ISpareDeleteService, SpareDeleteService>();
 
-            // SpareBrand
-            services.AddScoped<ISpareBrandAddService, SpareBrandAddService>();
+         // Brand
+         //services.AddScoped<IBrandAddService, BrandAddService>();
+         //services.AddScoped<IBrandGetService, BrandGetService>();
 
-            // Price
-            services.AddScoped<IPriceAddService, PriceAddService>();
-            services.AddScoped<IPriceUpdateService, PriceUpdateService>();
+         // SpareBrand
+         //services.AddScoped<ISpareBrandAddService, SpareBrandAddService>();
 
-            // Vehicle
-            services.AddScoped<IVehicleAddService, VehicleAddService>();
-            services.AddScoped<IVehicleGetService, VehicleGetService>();
+         // Price
+         //services.AddScoped<IPriceAddService, PriceAddService>();
+         //services.AddScoped<IPriceUpdateService, PriceUpdateService>();
 
-            return services;
-        }
-    }
+         // Vehicle
+         //services.AddScoped<IVehicleAddService, VehicleAddService>();
+         //services.AddScoped<IVehicleGetService, VehicleGetService>();
+
+         return services;
+      }
+   }
 }

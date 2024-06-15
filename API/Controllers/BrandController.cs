@@ -1,51 +1,48 @@
-﻿using Core.Contracts.Service.Brand;
-using Core.Services.BrandService.Commands.Create;
+﻿using Core.Features.Brands.Commands.CreateBrand;
+using Core.Features.Brands.Commands.DeleteBrand;
+using Core.Features.Brands.Queries.GetBrands;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/brands")]
-    [ApiController]
-    public class BrandController : Controller
-    {
-        private readonly IBrandAddService _brandAddService;
-        private readonly IBrandGetService _brandGetService;
+   [Route("api/brands")]
+   [ApiController]
+   public class BrandController : Controller
+   {
+      private readonly IMediator _mediator;
 
-        public BrandController(IBrandAddService brandAddService, IBrandGetService brandGetService)
-        {
-            _brandAddService = brandAddService;
-            _brandGetService = brandGetService;
-        }
+      public BrandController(IMediator mediator)
+      {
+         _mediator = mediator;
+      }
+
+      [HttpGet]
+      public async Task<ActionResult<IEnumerable<BrandResponse>>> GetBrands()
+      {
+         var response = await _mediator.Send(new GetBrandsQuery());
+
+         return Ok(response);
+      }
 
 
-        [HttpPost]
-        public async Task<ActionResult<BrandToReturn>> AddBrand(string brandName)
-        {
-            var brandToReturn = await _brandAddService.AddBrand(brandName);
+      [HttpPost("{brandName}")]
+      public async Task<ActionResult<BrandToReturn>> AddBrand(string brandName)
+      {
+         var brandToReturn = await _mediator.Send(new CreateBrandCommand() { brandName = brandName });
 
-            return Ok(brandToReturn);
-        }
+         return Ok(brandToReturn);
+      }
 
-        [HttpGet("{brandId}", Name = "GetBrand")]
-        public async Task<ActionResult<BrandToReturn>> GetBrand(Guid brandId)
-        {
-            BrandToReturn? brand = await _brandGetService.GetBrandById(brandId);
+      [HttpDelete("{brandId}")]
+      public async Task<IActionResult> DeleteBrand(Guid brandId)
+      {
+         bool response = await _mediator.Send(new DeleteBrandCommand() { brandId = brandId });
 
-            if (brand == null)
-            {
-                return NotFound();
-            }
+         if (!response) return NotFound();
 
-            return Ok(brand);
-        }
+         return NoContent();
+      }
 
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<BrandToReturn>>> GetAllBrands()
-        {
-            IReadOnlyList<BrandToReturn> brands = await _brandGetService.GetBrands();
-
-            return Ok(brands);
-        }
-
-    }
+   }
 }

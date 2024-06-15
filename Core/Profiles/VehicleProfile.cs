@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Core.Domain.Entities;
-using Core.Services.VehicleService.Commands.Create;
 
 namespace Core.Profiles
 {
@@ -8,8 +7,7 @@ namespace Core.Profiles
     {
         public VehicleProfile()
         {
-            CreateMap<VehicleToAdd, Vehicle>();
-            CreateMap<Vehicle, VehicleToReturn>();
+         
         }
     }
 }

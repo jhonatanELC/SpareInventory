@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories
             await _dbContext.Set<T>().AddAsync(entity);
         }
 
-        public  void DeleteAsync(T entity)
+        public  void Delete(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
         }
@@ -39,9 +39,9 @@ namespace Infrastructure.Repositories
             return t;
         }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
+        public async Task<IEnumerable<T>> ListAllAsync()
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<T>().AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> SaveChangesAsync()

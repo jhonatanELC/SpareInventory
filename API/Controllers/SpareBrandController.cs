@@ -1,8 +1,8 @@
-﻿using API.Wrapper;
-using Core.Contracts.Service.PriceService;
-using Core.Contracts.Service.SpareBrandService;
-using Core.Domain.Entities;
-using Core.Services.PriceService;
+﻿using Core.Features.Spares.Commands.CreateSpare;
+using Core.Features.Spares.Queries.GetSparesWithBrands;
+using Core.Features.Spares.Queries.GetSpareWithBrands;
+using Core.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -11,57 +11,47 @@ namespace API.Controllers
    [ApiController]
    public class SpareBrandController : Controller
    {
-      private readonly IPriceAddService _priceAddService;
-      private readonly ISpareBrandAddService _spareBrandAddService;
-      private readonly IPriceUpdateService _priceUpdateService;
+      private readonly IMediator _mediator;
 
-      public SpareBrandController(IPriceAddService priceAddService, ISpareBrandAddService spareBrandAddService, IPriceUpdateService priceUpdateService)
+      public SpareBrandController(IMediator mediator)
       {
-         _priceAddService = priceAddService;
-         _spareBrandAddService = spareBrandAddService;
-         _priceUpdateService = priceUpdateService;
+         _mediator = mediator;
       }
 
-      [HttpPost("price/{spareBrandId}")]
-      public async Task<ActionResult> AddPrice(PriceToAdd priceToAdd, Guid spareBrandId)
+      [HttpPost]
+      public async Task<ActionResult<SpareVmToReturn>> AddSpareWithBrand(CreateSpareCommand createSpareCommand)
       {
-         bool result = await _priceAddService.AddPrice(priceToAdd, spareBrandId);
+         SpareVmToReturn spare = await _mediator.Send(createSpareCommand);
 
-         if (!result) { return BadRequest(); }
-
-         return Ok(result);
+         return Ok(spare);
       }
 
-      [HttpPut("price/{spareBrandId}")]
-      public async Task<ActionResult> EditPrice([FromBody] PriceToAdd priceToUpdate, Guid spareBrandId)
+      [HttpGet("{spareId}", Name = "GetSpare")]
+      public async Task<ActionResult<SpareToReturn>> GetSpareWithBrands(Guid spareId)
       {
-         Price? price = await _priceUpdateService.UpdatePrice(priceToUpdate, spareBrandId);
-
-         if (price == null) return BadRequest();
-
-         return Ok();
-      }
-
-      [HttpPost()]
-      public async Task<ActionResult<bool>> AddBrandWithPriceToSpare(SpareBrandAndPriceToAdd data)
-      {
-         try
+         SpareToReturn? spare = await _mediator.Send(new GetSpareWithBrandsQuery()
          {
-            bool status = await _spareBrandAddService.AddBrandToSpare(data.SpareBrandToAdd, data.PriceToAdd);
-            return Ok(status);
+            SpareId = spareId
+         });
 
-         }
-         catch (InvalidOperationException ex)
+         if (spare == null)
          {
-            return BadRequest(new { message = ex.Message });
-
-         }
-         catch (Exception)
-         {
-            return StatusCode(500, "Internal server error");
+            return NotFound();
          }
 
+         return Ok(spare);
       }
+
+      [HttpGet]
+      public async Task<ActionResult<IReadOnlyList<SpareToReturn>>> GetSparesWithBrands(GetSparesWithBrandsQuery filter)
+      {
+         var spares = await _mediator.Send(filter);
+
+         return Ok(spares);
+      }
+
+
+
 
    }
 }

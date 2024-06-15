@@ -1,17 +1,18 @@
 ﻿using AutoMapper;
 using Core.Domain.Entities;
-using Core.Services.SpareService.Commands.Create;
-using Core.Services.SpareService.Queries;
+using Core.Features.Spares.Commands.CreateSpare;
+using Core.Features.Spares.Queries.GetSpareWithBrands;
 
 namespace Core.Profiles
 {
-   public class SparesProfile : Profile
+    public class SparesProfile : Profile
    {
       public SparesProfile()
-      {
-         CreateMap<SpareToAdd, Spare>();
-         CreateMap<Spare, SpareToReturn>();
-         CreateMap<Spare, SpareWithBrandToReturn>();
+      {   
+         CreateMap<CreateSpareCommand, Spare>();
+         CreateMap<CreateSpareCommand, Price>();
+         CreateMap<CreateSpareCommand, SpareBrand>();
+
 
          // All this mapping is to get SpareVmToReturn
          CreateMap<Spare, SpareVmToReturn>()

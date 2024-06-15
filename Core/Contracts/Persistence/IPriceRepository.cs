@@ -1,6 +1,8 @@
-﻿namespace Core.Contracts.Persistence
+﻿using Core.Domain.Entities;
+
+namespace Core.Contracts.Persistence
 {
-    public interface IPriceRepository
+    public interface IPriceRepository : IGenericRepository<Price>
     {
     }
 }

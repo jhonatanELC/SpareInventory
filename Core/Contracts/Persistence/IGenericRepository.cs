@@ -22,7 +22,7 @@ namespace Core.Contracts.Persistence
         /// Get a list of entities 
         /// </summary>
         /// <returns>A IReadOnlyList</returns>
-        Task<IReadOnlyList<T>> ListAllAsync();
+        Task<IEnumerable<T>> ListAllAsync();
 
         /// <summary>
         /// Add an entity
@@ -42,7 +42,7 @@ namespace Core.Contracts.Persistence
         /// Delete an entity
         /// </summary>
         /// <param name="entity"></param>
-        void DeleteAsync(T entity);
+        void Delete(T entity);
 
         /// <summary>
         /// Save changes
