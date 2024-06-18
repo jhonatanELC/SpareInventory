@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories
 
       public async Task<Spare?> GetSpareWithBrands(Guid spareId)
       {
-         Spare? spare = await _dbContext.Spares               
+         Spare? spare = await _dbContext.Spares
                .Include(b => b.SpareBrands)
                .ThenInclude(sb => sb.Brand)
                .Include(s => s.SpareBrands)
@@ -37,12 +37,17 @@ namespace Infrastructure.Repositories
 
       public async Task<IReadOnlyList<Spare>> GetSparesWithBrandsAsync(GetSparesWithBrandsQuery filter)
       {
+         bool searchBySku = false;
+
          IQueryable<Spare> collection = _dbContext.Spares;
 
          collection = collection.Include(s => s.Brands)
              .ThenInclude(b => b.SpareBrands)
              .ThenInclude(sb => sb.Price);
 
+         IQueryable<SpareBrand> spareBrands = _dbContext
+                  .SpareBrands.Where(sb => sb.Sku.Contains(filter.searchrBySku));
+         List<Guid> spareBrandIds = await spareBrands.Select(sb => sb.SpareBrandId).ToListAsync();
 
          // Filtering by Group
          if (!string.IsNullOrWhiteSpace(filter.filterByGroup))
@@ -63,17 +68,16 @@ namespace Infrastructure.Repositories
             filter.searchByOemCode = filter.searchByOemCode.Trim();
 
             collection = collection
-                .Where(s => s.OemCode == filter.searchByOemCode);
+                .Where(s => s.OemCode.Contains(filter.searchByOemCode));
          }
 
          // Search by Sku
          if (!string.IsNullOrWhiteSpace(filter.searchrBySku))
          {
+            searchBySku = true;
             filter.searchrBySku = filter.searchrBySku.Trim();
 
-            collection = collection
-               .Where(s => s.SpareBrands.Any(sb => sb.Sku.Contains(filter.searchrBySku)));
-
+            collection = collection.Where(s => s.SpareBrands.Any(sb => sb.Sku.Contains(filter.searchrBySku)));
          }
 
          // Search by description
@@ -90,6 +94,13 @@ namespace Infrastructure.Repositories
          var collectionToReturn = await collection
              .OrderBy(s => s.Group)
              .ToListAsync();
+
+         // Remove SpareBrands not in spareBrandIds
+         foreach (var spare in collectionToReturn)
+         {
+            spare.SpareBrands.RemoveAll(sb => !spareBrandIds.Contains(sb.SpareBrandId));
+         }
+
 
          return collectionToReturn;
       }
