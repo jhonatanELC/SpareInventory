@@ -96,11 +96,13 @@ namespace Infrastructure.Repositories
              .ToListAsync();
 
          // Remove SpareBrands not in spareBrandIds
-         foreach (var spare in collectionToReturn)
+         if (searchBySku)
          {
-            spare.SpareBrands.RemoveAll(sb => !spareBrandIds.Contains(sb.SpareBrandId));
+            foreach (var spare in collectionToReturn)
+            {
+               spare.SpareBrands.RemoveAll(sb => !spareBrandIds.Contains(sb.SpareBrandId));
+            }
          }
-
 
          return collectionToReturn;
       }
