@@ -20,6 +20,7 @@ namespace Infrastructure
          services.AddScoped<IBrandRepository, BrandRepository>();
          services.AddScoped<IPriceRepository, PriceRepository>();
          services.AddScoped<ISpareBrandRepository, SpareBrandRepository>();
+         services.AddScoped<IVehicleRepository, VehicleRepository>();
 
          return services;
       }
