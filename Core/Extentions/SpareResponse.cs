@@ -14,6 +14,7 @@ namespace Core.Extentions
             Description = spare.Description,
             OemCode = spare.OemCode,
             Group = spare.Group,
+            VehicleId = spare.VehicleId,
             Brands = spare.SpareBrands.Select(s => s.ToSpareBrandResponse()).ToList()
          };
       }

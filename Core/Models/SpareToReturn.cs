@@ -9,6 +9,7 @@ namespace Core.Models
       public string Comments { get; set; }
       public string OemCode { get; set; }
       public Group Group { get; set; }
+      public Guid? VehicleId { get; set; }
       public List<SpareBrandToReturn> Brands { get; set; }
    }
 }
